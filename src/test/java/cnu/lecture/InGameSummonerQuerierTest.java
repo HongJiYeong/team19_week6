@@ -47,4 +47,25 @@ public class InGameSummonerQuerierTest {
             assertThat(actualGameKey, is(expectedGameKey));
         }
     }
+    
+     @Test
+    public void shouldQuerierReportMoreThan5Summoners() throws Exception {  
+       participants = new Participant[4];
+       GIVEN:{
+            for(int i=0; i<participants.length; i++) {
+                participants[i] = mock(Participant.class);
+            }
+       }
+       
+       final int actualParticipants;
+        WHEN: {
+            when(gameinfo.getParticipants()).thenReturn(participants);
+            actualParticipants = gameinfo.getParticipants().length;
+        }
+       
+       final int expectedParticipants = 4;
+       THEN: {
+           assertTrue(actualParticipants >= expectedParticipants);
+        }
+    }
 }
